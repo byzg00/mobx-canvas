@@ -1,0 +1,4379 @@
+{
+    "info": {
+        "title": "Configuration API",
+        "version": "0.1.0"
+    },
+    "openapi": "3.1.0",
+    "servers": [
+        {
+            "url": "/"
+        }
+    ],
+    "paths": {
+        "/assistants/all": {
+            "get": {
+                "tags": [
+                    "Assistant"
+                ],
+                "summary": "List items",
+                "description": "List items with optional filtering and pagination",
+                "operationId": "AssistantsAllAll",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ]
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ]
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_litestar.dto._backend.AllAssistantResponseBody_"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/assistants": {
+            "post": {
+                "tags": [
+                    "Assistant"
+                ],
+                "summary": "Create item",
+                "description": "Create a new item",
+                "operationId": "AssistantsCreate",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "Optional comment for history"
+                        },
+                        "description": "Optional comment for history",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateAssistantRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Document created, URL follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateAssistantResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/assistants/{id}": {
+            "get": {
+                "tags": [
+                    "Assistant"
+                ],
+                "summary": "Get item by ID",
+                "description": "Retrieve a single item by its UUID",
+                "operationId": "AssistantsIdRetrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RetrieveAssistantResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Assistant"
+                ],
+                "summary": "Delete item",
+                "description": "Delete an item by ID",
+                "operationId": "AssistantsIdDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    },
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "Optional comment for history"
+                        },
+                        "description": "Optional comment for history",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Request fulfilled, nothing follows",
+                        "headers": {}
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Assistant"
+                ],
+                "summary": "Update item",
+                "description": "Update an existing item",
+                "operationId": "AssistantsIdUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    },
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "Optional comment for history"
+                        },
+                        "description": "Optional comment for history",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateAssistantRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateAssistantResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/collections/all": {
+            "get": {
+                "tags": [
+                    "Collection"
+                ],
+                "summary": "List items",
+                "description": "List items with optional filtering and pagination",
+                "operationId": "CollectionsAllAll",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ]
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ]
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_litestar.dto._backend.AllCollectionResponseBody_"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/collections": {
+            "post": {
+                "tags": [
+                    "Collection"
+                ],
+                "summary": "Create item",
+                "description": "Create a new item",
+                "operationId": "CollectionsCreate",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "Optional comment for history"
+                        },
+                        "description": "Optional comment for history",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCollectionCreateRequestRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Document created, URL follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateCollectionResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/collections/{id}": {
+            "get": {
+                "tags": [
+                    "Collection"
+                ],
+                "summary": "Get item by ID",
+                "description": "Retrieve a single item by its UUID",
+                "operationId": "CollectionsIdRetrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RetrieveCollectionResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Collection"
+                ],
+                "summary": "Delete item",
+                "description": "Delete an item by ID",
+                "operationId": "CollectionsIdDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    },
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "Optional comment for history"
+                        },
+                        "description": "Optional comment for history",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Request fulfilled, nothing follows",
+                        "headers": {}
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Collection"
+                ],
+                "summary": "Update item",
+                "description": "Update an existing item",
+                "operationId": "CollectionsIdUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    },
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "Optional comment for history"
+                        },
+                        "description": "Optional comment for history",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateCollectionUpdateRequestRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateCollectionResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/health": {
+            "get": {
+                "tags": [
+                    "health"
+                ],
+                "summary": "Health",
+                "operationId": "HealthHealth",
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/import_data": {
+            "post": {
+                "tags": [
+                    "import_data"
+                ],
+                "summary": "ImportModelData",
+                "operationId": "ImportDataImportModelData",
+                "parameters": [
+                    {
+                        "name": "reset",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "preset",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ]
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Document created, URL follows",
+                        "headers": {}
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/configurations/all": {
+            "get": {
+                "tags": [
+                    "Prepared configuration"
+                ],
+                "summary": "Get all prepared configuration",
+                "description": "It will be used by core module of rage system for load configuration as start",
+                "operationId": "ConfigurationsAllAllConfig",
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "$ref": "#/components/schemas/AllConfigAssistantPdResponseBody"
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/configurations/assistants/{id}": {
+            "get": {
+                "tags": [
+                    "Prepared configuration"
+                ],
+                "summary": "Get prepared configuration for one assistant",
+                "description": "It will be used by core module of rage system",
+                "operationId": "ConfigurationsAssistantsIdConfigByAssistant",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "$ref": "#/components/schemas/ConfigByAssistantAssistantPdResponseBody"
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/prompts/all": {
+            "get": {
+                "tags": [
+                    "Prompt"
+                ],
+                "summary": "List items",
+                "description": "List items with optional filtering and pagination",
+                "operationId": "PromptsAllAll",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ]
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ]
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_litestar.dto._backend.AllPromptResponseBody_"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/prompts": {
+            "post": {
+                "tags": [
+                    "Prompt"
+                ],
+                "summary": "Create item",
+                "description": "Create a new item",
+                "operationId": "PromptsCreate",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "Optional comment for history"
+                        },
+                        "description": "Optional comment for history",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreatePromptRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Document created, URL follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreatePromptResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/prompts/{id}": {
+            "get": {
+                "tags": [
+                    "Prompt"
+                ],
+                "summary": "Get item by ID",
+                "description": "Retrieve a single item by its UUID",
+                "operationId": "PromptsIdRetrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RetrievePromptResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Prompt"
+                ],
+                "summary": "Delete item",
+                "description": "Delete an item by ID",
+                "operationId": "PromptsIdDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    },
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "Optional comment for history"
+                        },
+                        "description": "Optional comment for history",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Request fulfilled, nothing follows",
+                        "headers": {}
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Prompt"
+                ],
+                "summary": "Update item",
+                "description": "Update an existing item",
+                "operationId": "PromptsIdUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    },
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "Optional comment for history"
+                        },
+                        "description": "Optional comment for history",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePromptRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdatePromptResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/sources/all": {
+            "get": {
+                "tags": [
+                    "Source"
+                ],
+                "summary": "List items",
+                "description": "List items with optional filtering and pagination",
+                "operationId": "SourcesAllAll",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ]
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ]
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "collection_id",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string",
+                                    "format": "uuid"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ]
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_litestar.dto._backend.AllSourceResponseBody_"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/sources": {
+            "post": {
+                "tags": [
+                    "Source"
+                ],
+                "summary": "Create item",
+                "description": "Create a new item",
+                "operationId": "SourcesCreate",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "Optional comment for history"
+                        },
+                        "description": "Optional comment for history",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateSourceRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Document created, URL follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateSourceResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/sources/{id}": {
+            "get": {
+                "tags": [
+                    "Source"
+                ],
+                "summary": "Get item by ID",
+                "description": "Retrieve a single item by its UUID",
+                "operationId": "SourcesIdRetrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RetrieveSourceResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Source"
+                ],
+                "summary": "Delete item",
+                "description": "Delete an item by ID",
+                "operationId": "SourcesIdDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    },
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "Optional comment for history"
+                        },
+                        "description": "Optional comment for history",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Request fulfilled, nothing follows",
+                        "headers": {}
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Source"
+                ],
+                "summary": "Update item",
+                "description": "Update an existing item",
+                "operationId": "SourcesIdUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    },
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "Optional comment for history"
+                        },
+                        "description": "Optional comment for history",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateSourceRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateSourceResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/source_types/all": {
+            "get": {
+                "tags": [
+                    "SourceType"
+                ],
+                "summary": "List items",
+                "description": "List items with optional filtering and pagination",
+                "operationId": "SourceTypesAllAll",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ]
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ]
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_litestar.dto._backend.AllSourceTypeResponseBody_"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/source_types/{id}": {
+            "get": {
+                "tags": [
+                    "SourceType"
+                ],
+                "summary": "Get item by ID",
+                "description": "Retrieve a single item by its UUID",
+                "operationId": "SourceTypesIdRetrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RetrieveSourceTypeResponseBody"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "SourceType"
+                ],
+                "summary": "Delete item",
+                "description": "Delete an item by ID",
+                "operationId": "SourceTypesIdDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    },
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "Optional comment for history"
+                        },
+                        "description": "Optional comment for history",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Request fulfilled, nothing follows",
+                        "headers": {}
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/source_types/{id}/schema": {
+            "get": {
+                "tags": [
+                    "SourceType"
+                ],
+                "summary": "Get Source Validation Schema",
+                "description": "Returns JSON validation schemas for the specified source type. These schemas define the expected format for source settings, included IDs, and excluded IDs.",
+                "operationId": "SourceTypesIdSchemaSchema",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SourceSchema"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AllAssistantResponseBody": {
+                "properties": {
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "prompt_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "collection_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_id",
+                    "created_at",
+                    "id",
+                    "name",
+                    "prompt_id",
+                    "updated_at"
+                ],
+                "title": "AllAssistantResponseBody"
+            },
+            "AllCollectionResponseBody": {
+                "properties": {
+                    "retriever_k": {
+                        "type": "integer",
+                        "default": 4
+                    },
+                    "metadata_schema": {
+                        "additionalProperties": {},
+                        "type": "object"
+                    },
+                    "strict_metadata_mode": {
+                        "type": "boolean"
+                    },
+                    "enable_tenanting": {
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at",
+                    "enable_tenanting",
+                    "id",
+                    "name",
+                    "strict_metadata_mode",
+                    "updated_at"
+                ],
+                "title": "AllCollectionResponseBody"
+            },
+            "AllConfigAssistantPdCollectionPdResponseBody": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of collection"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "strict_metadata_mode": {
+                        "type": "boolean"
+                    },
+                    "retriever_k": {
+                        "type": "integer"
+                    },
+                    "enable_tenanting": {
+                        "type": "boolean"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/AllConfigCollectionPd_0SourcePdResponseBody"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "enable_tenanting",
+                    "id",
+                    "name",
+                    "retriever_k",
+                    "sources",
+                    "strict_metadata_mode"
+                ],
+                "title": "AllConfigAssistantPdCollectionPdResponseBody"
+            },
+            "AllConfigAssistantPdPromptPdResponseBody": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of prompt"
+                    },
+                    "text": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "description",
+                    "id",
+                    "name",
+                    "text"
+                ],
+                "title": "AllConfigAssistantPdPromptPdResponseBody"
+            },
+            "AllConfigAssistantPdResponseBody": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of assistant"
+                    },
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "prompt_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "collection_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "prompt": {
+                        "$ref": "#/components/schemas/AllConfigAssistantPdPromptPdResponseBody"
+                    },
+                    "collection": {
+                        "$ref": "#/components/schemas/AllConfigAssistantPdCollectionPdResponseBody"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection",
+                    "collection_id",
+                    "id",
+                    "name",
+                    "prompt",
+                    "prompt_id"
+                ],
+                "title": "AllConfigAssistantPdResponseBody"
+            },
+            "AllConfigCollectionPd_0SourcePdResponseBody": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "source_type_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "is_directory": {
+                        "type": "boolean"
+                    },
+                    "drop_old": {
+                        "type": "boolean"
+                    },
+                    "ids": {
+                        "oneOf": [
+                            {},
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "exclude_ids": {
+                        "oneOf": [
+                            {},
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "preprocessing_steps": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "source_settings": {
+                        "additionalProperties": {},
+                        "type": "object"
+                    },
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "deleted": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "deleted",
+                    "drop_old",
+                    "enabled",
+                    "id",
+                    "is_directory",
+                    "name",
+                    "preprocessing_steps",
+                    "source_settings",
+                    "source_type_id"
+                ],
+                "title": "AllConfigCollectionPd_0SourcePdResponseBody"
+            },
+            "AllPromptResponseBody": {
+                "properties": {
+                    "text": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at",
+                    "id",
+                    "name",
+                    "text",
+                    "updated_at"
+                ],
+                "title": "AllPromptResponseBody"
+            },
+            "AllSourceResponseBody": {
+                "properties": {
+                    "source_type_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "is_directory": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "drop_old": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "ids": {
+                        "items": {},
+                        "type": "array"
+                    },
+                    "exclude_ids": {
+                        "items": {},
+                        "type": "array"
+                    },
+                    "preprocessing_steps": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "source_settings": {
+                        "additionalProperties": {},
+                        "type": "object"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at",
+                    "id",
+                    "name",
+                    "source_settings",
+                    "source_type_id",
+                    "updated_at"
+                ],
+                "title": "AllSourceResponseBody"
+            },
+            "AllSourceTypeResponseBody": {
+                "properties": {
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at",
+                    "id",
+                    "name",
+                    "updated_at"
+                ],
+                "title": "AllSourceTypeResponseBody"
+            },
+            "ConfigByAssistantAssistantPdCollectionPdResponseBody": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of collection"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "strict_metadata_mode": {
+                        "type": "boolean"
+                    },
+                    "retriever_k": {
+                        "type": "integer"
+                    },
+                    "enable_tenanting": {
+                        "type": "boolean"
+                    },
+                    "sources": {
+                        "items": {
+                            "$ref": "#/components/schemas/ConfigByAssistantCollectionPd_0SourcePdResponseBody"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "enable_tenanting",
+                    "id",
+                    "name",
+                    "retriever_k",
+                    "sources",
+                    "strict_metadata_mode"
+                ],
+                "title": "ConfigByAssistantAssistantPdCollectionPdResponseBody"
+            },
+            "ConfigByAssistantAssistantPdPromptPdResponseBody": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of prompt"
+                    },
+                    "text": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "description",
+                    "id",
+                    "name",
+                    "text"
+                ],
+                "title": "ConfigByAssistantAssistantPdPromptPdResponseBody"
+            },
+            "ConfigByAssistantAssistantPdResponseBody": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of assistant"
+                    },
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "prompt_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "collection_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "prompt": {
+                        "$ref": "#/components/schemas/ConfigByAssistantAssistantPdPromptPdResponseBody"
+                    },
+                    "collection": {
+                        "$ref": "#/components/schemas/ConfigByAssistantAssistantPdCollectionPdResponseBody"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection",
+                    "collection_id",
+                    "id",
+                    "name",
+                    "prompt",
+                    "prompt_id"
+                ],
+                "title": "ConfigByAssistantAssistantPdResponseBody"
+            },
+            "ConfigByAssistantCollectionPd_0SourcePdResponseBody": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "source_type_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "is_directory": {
+                        "type": "boolean"
+                    },
+                    "drop_old": {
+                        "type": "boolean"
+                    },
+                    "ids": {
+                        "oneOf": [
+                            {},
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "exclude_ids": {
+                        "oneOf": [
+                            {},
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "preprocessing_steps": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "source_settings": {
+                        "additionalProperties": {},
+                        "type": "object"
+                    },
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "deleted": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "deleted",
+                    "drop_old",
+                    "enabled",
+                    "id",
+                    "is_directory",
+                    "name",
+                    "preprocessing_steps",
+                    "source_settings",
+                    "source_type_id"
+                ],
+                "title": "ConfigByAssistantCollectionPd_0SourcePdResponseBody"
+            },
+            "CreateAssistantRequestBody": {
+                "properties": {
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "prompt_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "collection_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_id",
+                    "name",
+                    "prompt_id"
+                ],
+                "title": "CreateAssistantRequestBody"
+            },
+            "CreateAssistantResponseBody": {
+                "properties": {
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "prompt_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "collection_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_id",
+                    "created_at",
+                    "id",
+                    "name",
+                    "prompt_id",
+                    "updated_at"
+                ],
+                "title": "CreateAssistantResponseBody"
+            },
+            "CreateCollectionCreateRequestRequestBody": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "retriever_k": {
+                        "type": "integer"
+                    },
+                    "metadata_schema": {
+                        "additionalProperties": {},
+                        "type": "object"
+                    },
+                    "strict_metadata_mode": {
+                        "type": "boolean"
+                    },
+                    "enable_tenanting": {
+                        "type": "boolean"
+                    },
+                    "source_ids": {
+                        "items": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "enable_tenanting",
+                    "metadata_schema",
+                    "name",
+                    "retriever_k",
+                    "strict_metadata_mode"
+                ],
+                "title": "CreateCollectionCreateRequestRequestBody"
+            },
+            "CreateCollectionResponseBody": {
+                "properties": {
+                    "retriever_k": {
+                        "type": "integer",
+                        "default": 4
+                    },
+                    "metadata_schema": {
+                        "additionalProperties": {},
+                        "type": "object"
+                    },
+                    "strict_metadata_mode": {
+                        "type": "boolean"
+                    },
+                    "enable_tenanting": {
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at",
+                    "enable_tenanting",
+                    "id",
+                    "name",
+                    "strict_metadata_mode",
+                    "updated_at"
+                ],
+                "title": "CreateCollectionResponseBody"
+            },
+            "CreatePromptRequestBody": {
+                "properties": {
+                    "text": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "text"
+                ],
+                "title": "CreatePromptRequestBody"
+            },
+            "CreatePromptResponseBody": {
+                "properties": {
+                    "text": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at",
+                    "id",
+                    "name",
+                    "text",
+                    "updated_at"
+                ],
+                "title": "CreatePromptResponseBody"
+            },
+            "CreateSourceRequestBody": {
+                "properties": {
+                    "source_type_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "is_directory": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "drop_old": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "ids": {
+                        "items": {},
+                        "type": "array"
+                    },
+                    "exclude_ids": {
+                        "items": {},
+                        "type": "array"
+                    },
+                    "preprocessing_steps": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "source_settings": {
+                        "additionalProperties": {},
+                        "type": "object"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "source_settings",
+                    "source_type_id"
+                ],
+                "title": "CreateSourceRequestBody"
+            },
+            "CreateSourceResponseBody": {
+                "properties": {
+                    "source_type_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "is_directory": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "drop_old": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "ids": {
+                        "items": {},
+                        "type": "array"
+                    },
+                    "exclude_ids": {
+                        "items": {},
+                        "type": "array"
+                    },
+                    "preprocessing_steps": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "source_settings": {
+                        "additionalProperties": {},
+                        "type": "object"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at",
+                    "id",
+                    "name",
+                    "source_settings",
+                    "source_type_id",
+                    "updated_at"
+                ],
+                "title": "CreateSourceResponseBody"
+            },
+            "PaginatedResponse_litestar.dto._backend.AllAssistantResponseBody_": {
+                "properties": {
+                    "objects": {
+                        "items": {
+                            "$ref": "#/components/schemas/AllAssistantResponseBody"
+                        },
+                        "type": "array"
+                    },
+                    "count": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "count",
+                    "objects"
+                ],
+                "title": "PaginatedResponse[AllAssistantResponseBody]"
+            },
+            "PaginatedResponse_litestar.dto._backend.AllCollectionResponseBody_": {
+                "properties": {
+                    "objects": {
+                        "items": {
+                            "$ref": "#/components/schemas/AllCollectionResponseBody"
+                        },
+                        "type": "array"
+                    },
+                    "count": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "count",
+                    "objects"
+                ],
+                "title": "PaginatedResponse[AllCollectionResponseBody]"
+            },
+            "PaginatedResponse_litestar.dto._backend.AllPromptResponseBody_": {
+                "properties": {
+                    "objects": {
+                        "items": {
+                            "$ref": "#/components/schemas/AllPromptResponseBody"
+                        },
+                        "type": "array"
+                    },
+                    "count": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "count",
+                    "objects"
+                ],
+                "title": "PaginatedResponse[AllPromptResponseBody]"
+            },
+            "PaginatedResponse_litestar.dto._backend.AllSourceResponseBody_": {
+                "properties": {
+                    "objects": {
+                        "items": {
+                            "$ref": "#/components/schemas/AllSourceResponseBody"
+                        },
+                        "type": "array"
+                    },
+                    "count": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "count",
+                    "objects"
+                ],
+                "title": "PaginatedResponse[AllSourceResponseBody]"
+            },
+            "PaginatedResponse_litestar.dto._backend.AllSourceTypeResponseBody_": {
+                "properties": {
+                    "objects": {
+                        "items": {
+                            "$ref": "#/components/schemas/AllSourceTypeResponseBody"
+                        },
+                        "type": "array"
+                    },
+                    "count": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "count",
+                    "objects"
+                ],
+                "title": "PaginatedResponse[AllSourceTypeResponseBody]"
+            },
+            "RetrieveAssistantResponseBody": {
+                "properties": {
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "prompt_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "collection_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_id",
+                    "created_at",
+                    "id",
+                    "name",
+                    "prompt_id",
+                    "updated_at"
+                ],
+                "title": "RetrieveAssistantResponseBody"
+            },
+            "RetrieveCollectionResponseBody": {
+                "properties": {
+                    "retriever_k": {
+                        "type": "integer",
+                        "default": 4
+                    },
+                    "metadata_schema": {
+                        "additionalProperties": {},
+                        "type": "object"
+                    },
+                    "strict_metadata_mode": {
+                        "type": "boolean"
+                    },
+                    "enable_tenanting": {
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at",
+                    "enable_tenanting",
+                    "id",
+                    "name",
+                    "strict_metadata_mode",
+                    "updated_at"
+                ],
+                "title": "RetrieveCollectionResponseBody"
+            },
+            "RetrievePromptResponseBody": {
+                "properties": {
+                    "text": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at",
+                    "id",
+                    "name",
+                    "text",
+                    "updated_at"
+                ],
+                "title": "RetrievePromptResponseBody"
+            },
+            "RetrieveSourceResponseBody": {
+                "properties": {
+                    "source_type_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "is_directory": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "drop_old": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "ids": {
+                        "items": {},
+                        "type": "array"
+                    },
+                    "exclude_ids": {
+                        "items": {},
+                        "type": "array"
+                    },
+                    "preprocessing_steps": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "source_settings": {
+                        "additionalProperties": {},
+                        "type": "object"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at",
+                    "id",
+                    "name",
+                    "source_settings",
+                    "source_type_id",
+                    "updated_at"
+                ],
+                "title": "RetrieveSourceResponseBody"
+            },
+            "RetrieveSourceTypeResponseBody": {
+                "properties": {
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at",
+                    "id",
+                    "name",
+                    "updated_at"
+                ],
+                "title": "RetrieveSourceTypeResponseBody"
+            },
+            "SourceSchema": {
+                "properties": {
+                    "source_settings": {
+                        "type": "object"
+                    },
+                    "ids": {
+                        "type": "object"
+                    },
+                    "exclude_ids": {
+                        "type": "object"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "exclude_ids",
+                    "ids",
+                    "source_settings"
+                ],
+                "title": "SourceSchema"
+            },
+            "UpdateAssistantRequestBody": {
+                "properties": {
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "prompt_id": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        ]
+                    },
+                    "collection_id": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        ]
+                    },
+                    "name": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [],
+                "title": "UpdateAssistantRequestBody"
+            },
+            "UpdateAssistantResponseBody": {
+                "properties": {
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "prompt_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "collection_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_id",
+                    "created_at",
+                    "id",
+                    "name",
+                    "prompt_id",
+                    "updated_at"
+                ],
+                "title": "UpdateAssistantResponseBody"
+            },
+            "UpdateCollectionResponseBody": {
+                "properties": {
+                    "retriever_k": {
+                        "type": "integer",
+                        "default": 4
+                    },
+                    "metadata_schema": {
+                        "additionalProperties": {},
+                        "type": "object"
+                    },
+                    "strict_metadata_mode": {
+                        "type": "boolean"
+                    },
+                    "enable_tenanting": {
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at",
+                    "enable_tenanting",
+                    "id",
+                    "name",
+                    "strict_metadata_mode",
+                    "updated_at"
+                ],
+                "title": "UpdateCollectionResponseBody"
+            },
+            "UpdateCollectionUpdateRequestRequestBody": {
+                "properties": {
+                    "name": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "retriever_k": {
+                        "oneOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "metadata_schema": {
+                        "oneOf": [
+                            {
+                                "additionalProperties": {},
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "strict_metadata_mode": {
+                        "oneOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "enable_tenanting": {
+                        "oneOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "enabled": {
+                        "oneOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "source_ids": {
+                        "oneOf": [
+                            {
+                                "items": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [],
+                "title": "UpdateCollectionUpdateRequestRequestBody"
+            },
+            "UpdatePromptRequestBody": {
+                "properties": {
+                    "text": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "enabled": {
+                        "oneOf": [
+                            {
+                                "type": "boolean"
+                            }
+                        ]
+                    },
+                    "name": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [],
+                "title": "UpdatePromptRequestBody"
+            },
+            "UpdatePromptResponseBody": {
+                "properties": {
+                    "text": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at",
+                    "id",
+                    "name",
+                    "text",
+                    "updated_at"
+                ],
+                "title": "UpdatePromptResponseBody"
+            },
+            "UpdateSourceRequestBody": {
+                "properties": {
+                    "source_type_id": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        ]
+                    },
+                    "is_directory": {
+                        "oneOf": [
+                            {
+                                "type": "boolean"
+                            }
+                        ]
+                    },
+                    "drop_old": {
+                        "oneOf": [
+                            {
+                                "type": "boolean"
+                            }
+                        ]
+                    },
+                    "ids": {
+                        "oneOf": [
+                            {
+                                "items": {},
+                                "type": "array"
+                            }
+                        ]
+                    },
+                    "exclude_ids": {
+                        "oneOf": [
+                            {
+                                "items": {},
+                                "type": "array"
+                            }
+                        ]
+                    },
+                    "preprocessing_steps": {
+                        "oneOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            }
+                        ]
+                    },
+                    "source_settings": {
+                        "oneOf": [
+                            {
+                                "additionalProperties": {},
+                                "type": "object"
+                            }
+                        ]
+                    },
+                    "enabled": {
+                        "oneOf": [
+                            {
+                                "type": "boolean"
+                            }
+                        ]
+                    },
+                    "name": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [],
+                "title": "UpdateSourceRequestBody"
+            },
+            "UpdateSourceResponseBody": {
+                "properties": {
+                    "source_type_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "is_directory": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "drop_old": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "ids": {
+                        "items": {},
+                        "type": "array"
+                    },
+                    "exclude_ids": {
+                        "items": {},
+                        "type": "array"
+                    },
+                    "preprocessing_steps": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "source_settings": {
+                        "additionalProperties": {},
+                        "type": "object"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at",
+                    "id",
+                    "name",
+                    "source_settings",
+                    "source_type_id",
+                    "updated_at"
+                ],
+                "title": "UpdateSourceResponseBody"
+            }
+        },
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "description": "Enter the Bearer token in the format: Bearer <token>",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}

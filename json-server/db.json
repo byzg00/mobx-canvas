@@ -1,0 +1,322 @@
+{
+  "assistants": [
+    {
+      "description": "Ассистент для помощи программистам: отвечает на вопросы, объясняет код, генерирует функции",
+      "prompt_id": "9c0f4a9a-71a6-4a7c-b5ff-8c3d1a0e6b11",
+      "collection_id": "a24f5080-3fd7-4ea9-8d3c-9987a71f0a40",
+      "id": "4bd88e67-e5c3-4569-bf09-daf1eb014029",
+      "created_at": "2025-06-09T11:49:06.334Z",
+      "updated_at": "2025-06-09T11:49:06.334Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "CodeHelper AI"
+    },
+    {
+      "description": "AI-ассистент для ежедневного планирования задач и управления временем",
+      "prompt_id": "1ddc3e29-6f91-4e30-acc3-05f9c9e7e39e",
+      "collection_id": "0dc7cf53-1543-41d6-9c33-d21d84e2289c",
+      "id": "a8354fcb-d4ae-4c83-a07b-d87c730e3e26",
+      "created_at": "2025-12-09T11:49:06.334Z",
+      "updated_at": "2025-06-09T11:49:06.334Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "TimeMaster AI"
+    },
+    {
+      "description": "Персональный помощник-психотерапевт для поддержки и медитаций",
+      "prompt_id": "b9a6676d-fb24-4e58-9a7e-89e1ef2a43bc",
+      "collection_id": "e35d55c2-f50f-4769-8e9a-d1e2a3e539db",
+      "id": "d11b389f-164f-40cf-8d38-48b8fc6c8cbe",
+      "created_at": "2025-06-09T11:49:06.334Z",
+      "updated_at": "2025-06-09T11:49:06.334Z",
+      "enabled": false,
+      "deleted": false,
+      "name": "CalmMind AI"
+    },
+    {
+      "description": "AI-консьерж для путешествий: бронирование, советы, маршруты",
+      "prompt_id": "3ea32b15-2b62-45ae-bb1e-7ec82ddcf6ed",
+      "collection_id": "fa870f38-c8e4-40cf-a7bc-bd40dc4b05cf",
+      "id": "dccefa5d-f118-41c7-a98d-194149a64eaa",
+      "created_at": "2025-06-09T11:49:06.334Z",
+      "updated_at": "2025-06-09T11:49:06.334Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "TravelMate AI"
+    },
+    {
+      "description": "Образовательный ассистент: помогает учиться, сдает экзамены, объясняет темы",
+      "prompt_id": "edf9b029-9e4d-4cf9-9b57-09b093f2cf38",
+      "collection_id": "fd96f8f2-2a77-41ae-b70d-6d7950f9cba5",
+      "id": "6a82640e-3d68-46f9-b94e-d5bbcf03e031",
+      "created_at": "2025-06-09T11:49:06.334Z",
+      "updated_at": "2025-06-09T11:49:06.334Z",
+      "enabled": false,
+      "deleted": false,
+      "name": "StudyGenie AI"
+    },
+    {
+      "description": "Маркетинговый AI: анализирует аудитории, предлагает креативы, пишет тексты",
+      "prompt_id": "fb4fc412-d9ae-4a95-8586-bb984d178e20",
+      "collection_id": "2c4ff1a4-7921-4083-83be-2be21f9ef93e",
+      "id": "3d8d49bb-4b28-4e0e-a417-6517d7e31ba3",
+      "created_at": "2025-06-09T11:49:06.334Z",
+      "updated_at": "2025-06-09T11:49:06.334Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "MarketSage AI"
+    }
+  ],
+  "collections": [
+    {
+      "retriever_k": 4,
+      "metadata_schema": {
+        "source": "wikipedia",
+        "language": "en",
+        "domain": "science"
+      },
+      "strict_metadata_mode": true,
+      "id": "dfb55a3c-6c75-4b87-a2d0-5077d00f178e",
+      "created_at": "2025-06-12T15:14:45.147Z",
+      "updated_at": "2025-06-12T15:14:45.147Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "ScienceArticles"
+    },
+    {
+      "retriever_k": 10,
+      "metadata_schema": {
+        "source": "stackoverflow",
+        "language": "en",
+        "tag": "javascript"
+      },
+      "strict_metadata_mode": false,
+      "id": "8ce32d9f-e72d-4fcf-b6b5-1846ce6c9a83",
+      "created_at": "2025-06-12T15:14:45.147Z",
+      "updated_at": "2025-06-12T15:14:45.147Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "DevAnswersJS"
+    },
+    {
+      "retriever_k": 3,
+      "metadata_schema": {
+        "source": "arxiv",
+        "category": "cs.AI",
+        "language": "en"
+      },
+      "strict_metadata_mode": true,
+      "id": "48f28f22-7ec8-47b5-9be8-2d60cc17bb8e",
+      "created_at": "2025-06-12T15:14:45.147Z",
+      "updated_at": "2025-06-12T15:14:45.147Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "ArxivAI"
+    },
+    {
+      "retriever_k": 5,
+      "metadata_schema": {
+        "region": "us-west",
+        "type": "legal",
+        "language": "en"
+      },
+      "strict_metadata_mode": false,
+      "id": "aad91a8d-3b8f-445c-9306-05ea7dc3b48d",
+      "created_at": "2025-06-12T15:14:45.147Z",
+      "updated_at": "2025-06-12T15:14:45.147Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "LegalDocsUS"
+    },
+    {
+      "retriever_k": 7,
+      "metadata_schema": {
+        "language": "ru",
+        "theme": "history",
+        "source": "local_archive"
+      },
+      "strict_metadata_mode": true,
+      "id": "0dc7cf53-1543-41d6-9c33-d21d84e2289c",
+      "created_at": "2025-06-12T15:14:45.147Z",
+      "updated_at": "2025-06-12T15:14:45.147Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "RussianHistory"
+    }
+  ],
+  "prompts": [
+    {
+      "text": "You are a helpful assistant who always answers politely.",
+      "description": "Base personality for assistant mode.",
+      "id": "b4a1a3d4-9c4a-4f0b-81b5-d781d01c90f1",
+      "created_at": "2025-06-11T15:19:47.894Z",
+      "updated_at": "2025-06-11T15:19:47.894Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "PoliteAssistant"
+    },
+    {
+      "text": "Respond concisely and focus on delivering key points only.",
+      "description": "Used for summary mode.",
+      "id": "9a6e38e7-4a3e-4e3d-b5df-bd0c725ac3c8",
+      "created_at": "2025-06-11T15:19:47.894Z",
+      "updated_at": "2025-06-11T15:19:47.894Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "SummaryMode"
+    },
+    {
+      "text": "Adopt the tone and language of a senior software engineer.",
+      "description": "For technical responses and code reviews.",
+      "id": "f64c6eb9-b1c7-4e0a-a15c-df32dececf0c",
+      "created_at": "2025-06-11T15:19:47.894Z",
+      "updated_at": "2025-06-11T15:19:47.894Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "EngineerVoice"
+    },
+    {
+      "text": "Answer in the style of a medieval sage or oracle.",
+      "description": "Fun and thematic mode for fantasy-style interactions.",
+      "id": "1ddc3e29-6f91-4e30-acc3-05f9c9e7e39e",
+      "created_at": "2025-06-11T15:19:47.894Z",
+      "updated_at": "2025-06-11T15:19:47.894Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "OracleMode"
+    },
+    {
+      "text": "Always provide citations and link to original sources when possible.",
+      "description": "Used in research or academic environments.",
+      "id": "70f233c2-2fc7-47b3-874e-9388b6c276b2",
+      "created_at": "2025-06-11T15:19:47.894Z",
+      "updated_at": "2025-06-11T15:19:47.894Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "CitationRequired"
+    }
+  ],
+  "sources": [
+    {
+      "source_type_id": "b65e37ab-dfc4-4b56-9c9c-8bcb70ad0cc1",
+      "is_directory": false,
+      "drop_old": true,
+      "ids": [
+        "source_1",
+        "source_2"
+      ],
+      "exclude_ids": [
+        "exclude_1"
+      ],
+      "preprocessing_steps": [
+        "tokenization",
+        "stop_word_removal"
+      ],
+      "source_setting": {
+        "encoding": "utf-8",
+        "compression": "gzip"
+      },
+      "id": "cc1b0d50-d457-4e9a-bd37-f8fa9ac5402d",
+      "created_at": "2025-06-25T14:39:51.227Z",
+      "updated_at": "2025-06-25T14:39:51.227Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "TechArticlesSource"
+    },
+    {
+      "source_type_id": "f1e39b6e-1b69-4380-8cb2-5ad1c39a2873",
+      "is_directory": true,
+      "drop_old": false,
+      "ids": [
+        "article_1",
+        "article_2"
+      ],
+      "exclude_ids": [],
+      "preprocessing_steps": [
+        "text_cleaning",
+        "lemmatization"
+      ],
+      "source_setting": {
+        "source": "wikipedia",
+        "language": "en"
+      },
+      "id": "eaab1f93-c13e-4874-b2d9-03339a545379",
+      "created_at": "2025-06-25T14:39:51.227Z",
+      "updated_at": "2025-06-25T14:39:51.227Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "WikipediaSource"
+    },
+    {
+      "source_type_id": "99ea56b1-f8f9-43a5-bfe5-c1c7cbd08b4c",
+      "is_directory": false,
+      "drop_old": true,
+      "ids": [
+        "source_3"
+      ],
+      "exclude_ids": [
+        "exclude_2"
+      ],
+      "preprocessing_steps": [
+        "tokenization",
+        "entity_recognition"
+      ],
+      "source_setting": {
+        "max_results": "100",
+        "fetch_interval": "5m"
+      },
+      "id": "d5ef0d63-b89b-41d2-a5d7-44cd205d208d",
+      "created_at": "2025-06-25T14:39:51.227Z",
+      "updated_at": "2025-06-25T14:39:51.227Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "NewsSource"
+    },
+    {
+      "source_type_id": "7e73f4b7-0635-4c0a-bba3-bd65e93a10c6",
+      "is_directory": true,
+      "drop_old": false,
+      "ids": [
+        "source_4"
+      ],
+      "exclude_ids": [],
+      "preprocessing_steps": [
+        "synonym_expansion",
+        "text_cleaning"
+      ],
+      "source_setting": {
+        "language": "fr",
+        "source": "local_archive"
+      },
+      "id": "e3b2e42e-8f26-47d5-9155-c581ba5a6015",
+      "created_at": "2025-06-25T14:39:51.227Z",
+      "updated_at": "2025-06-25T14:39:51.227Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "FrenchHistorySource"
+    },
+    {
+      "source_type_id": "0fc557c8-d476-47ea-b0f3-b40556cf7b88",
+      "is_directory": false,
+      "drop_old": true,
+      "ids": [
+        "source_5"
+      ],
+      "exclude_ids": [],
+      "preprocessing_steps": [
+        "stop_word_removal",
+        "part_of_speech_tagging"
+      ],
+      "source_setting": {
+        "api_key": "xyz123",
+        "endpoint": "https://api.legaldata.com"
+      },
+      "id": "8cb7f3bc-21b0-4f4f-8d4e-4970a13ae022",
+      "created_at": "2025-06-25T14:39:51.227Z",
+      "updated_at": "2025-06-25T14:39:51.227Z",
+      "enabled": true,
+      "deleted": false,
+      "name": "LegalDataSource"
+    }
+  ]
+}

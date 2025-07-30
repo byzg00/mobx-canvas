@@ -1,0 +1,86 @@
+import { AllCollectionResponseBody } from '@/api/generated_api';
+import { SnakeCaseObject } from '@/types';
+
+const collectionsMock: SnakeCaseObject<AllCollectionResponseBody>[] = [
+    {
+        retriever_k: 4,
+        metadata_schema: {
+            source: 'wikipedia',
+            language: 'en',
+            domain: 'science',
+        },
+        strict_metadata_mode: true,
+        enable_tenanting: true,
+        id: 'dfb55a3c-6c75-4b87-a2d0-5077d00f178e',
+        created_at: '2025-06-12T15:14:45.147Z',
+        updated_at: '2025-06-12T15:14:45.147Z',
+        enabled: true,
+        deleted: false,
+        name: 'ScienceArticles',
+    },
+    {
+        retriever_k: 10,
+        metadata_schema: {
+            source: 'stackoverflow',
+            language: 'en',
+            tag: 'javascript',
+        },
+        strict_metadata_mode: false,
+        enable_tenanting: true,
+        id: '8ce32d9f-e72d-4fcf-b6b5-1846ce6c9a83',
+        created_at: '2025-06-12T15:14:45.147Z',
+        updated_at: '2025-06-12T15:14:45.147Z',
+        enabled: true,
+        deleted: false,
+        name: 'DevAnswersJS',
+    },
+    {
+        retriever_k: 3,
+        metadata_schema: {
+            source: 'arxiv',
+            category: 'cs.AI',
+            language: 'en',
+        },
+        strict_metadata_mode: true,
+        enable_tenanting: true,
+        id: '48f28f22-7ec8-47b5-9be8-2d60cc17bb8e',
+        created_at: '2025-06-12T15:14:45.147Z',
+        updated_at: '2025-06-12T15:14:45.147Z',
+        enabled: true,
+        deleted: false,
+        name: 'ArxivAI',
+    },
+    {
+        retriever_k: 5,
+        metadata_schema: {
+            region: 'us-west',
+            type: 'legal',
+            language: 'en',
+        },
+        strict_metadata_mode: false,
+        enable_tenanting: true,
+        id: 'aad91a8d-3b8f-445c-9306-05ea7dc3b48d',
+        created_at: '2025-06-12T15:14:45.147Z',
+        updated_at: '2025-06-12T15:14:45.147Z',
+        enabled: true,
+        deleted: false,
+        name: 'LegalDocsUS',
+    },
+    {
+        retriever_k: 7,
+        metadata_schema: {
+            language: 'ru',
+            theme: 'history',
+            source: 'local_archive',
+        },
+        strict_metadata_mode: true,
+        enable_tenanting: true,
+        id: '0dc7cf53-1543-41d6-9c33-d21d84e2289c',
+        created_at: '2025-06-12T15:14:45.147Z',
+        updated_at: '2025-06-12T15:14:45.147Z',
+        enabled: true,
+        deleted: false,
+        name: 'RussianHistory',
+    },
+];
+export default collectionsMock;
