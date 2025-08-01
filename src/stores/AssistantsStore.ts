@@ -1,5 +1,3 @@
-import {action, computed, makeAutoObservable, makeObservable, observable} from 'mobx';
-
 import { Assistant } from '@/types';
 import { AssistantService } from '@/api/generated_api';
 import { BaseStore } from '@/stores/BaseStore';
@@ -7,13 +5,19 @@ import { BaseStore } from '@/stores/BaseStore';
 export class AssistantsStore extends BaseStore<Assistant> {
     constructor() {
         super();
-        // makeObservable(this, {
-        //     items: observable,
-        //     all: computed,
-        //     setIsBarking: action
-        // });
         this.fetchListApi = () => AssistantService.getAssistantsAll({});
+        this.patchItemApi = (id: string, data: Partial<Assistant>) => (
+            AssistantService.patchAssistant({
+                id,
+                requestBody: data,
+            })
+        );
+        this.removeItemApi = (id: string) => (
+            AssistantService.deleteAssistant({
+                id,
+            })
+        );
     }
 }
 
-export const assistantStore = new AssistantsStore();
+export const assistantsStore = new AssistantsStore();

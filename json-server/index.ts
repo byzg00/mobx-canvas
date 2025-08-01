@@ -12,7 +12,6 @@ const outputPath = path.resolve(__dirname, './db.json');
 if (!existsSync(outputPath)) {
     const mocksDir = path.resolve(__dirname, '../src/mocks');
 
-
 // Собираем все .ts-файлы из папки mocks
     const files = (await readdir(mocksDir)).filter((f) => f.endsWith('.ts'));
 

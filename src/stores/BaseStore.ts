@@ -5,11 +5,17 @@ export class BaseStore<Entity extends { id: string }> {
 
     protected fetchListApi: (() => Promise<{ objects: Entity[]; }>) | undefined;
 
+    protected patchItemApi: ((id: string, data: Partial<Entity>) => Promise<Entity>) | undefined;
+
+    protected removeItemApi: ((id: string) => Promise<void>) | undefined;
+
     constructor() {
         makeObservable(this, {
             items: observable,
             all: computed,
             add: action,
+            patchItem: action.bound,
+            removeItem: action.bound,
         });
     }
 
@@ -17,9 +23,12 @@ export class BaseStore<Entity extends { id: string }> {
         this.items.set(item.id, item);
     }
 
-    // public remove(id: string) {
-    //     this.items.delete(id);
-    // }
+    public removeItem(id: string) {
+        return (this.removeItemApi?.(id)
+            .then(() => {
+                this.items.delete(id);
+            })) || Promise.reject();
+    }
 
     public fetchList(): Promise<void> {
         return (this.fetchListApi?.()
@@ -27,6 +36,16 @@ export class BaseStore<Entity extends { id: string }> {
                 result.objects.forEach((item: Entity) => {
                     this.add(item);
                 });
+            })) || Promise.reject();
+    }
+
+    public patchItem(id: string, data: Partial<Entity>): Promise<void> {
+        return (this.patchItemApi?.(id, data)
+            .then((result) => {
+                const item = this.items.get(id);
+                if (item) {
+                    Object.assign(item, result);
+                }
             })) || Promise.reject();
     }
 
@@ -44,7 +63,7 @@ export class BaseStore<Entity extends { id: string }> {
 
     public toJSON() {
         return {
-            items: this.all.map((item) => ({ ...item })),
+            items: JSON.parse(JSON.stringify(this.all)),
         };
     }
 }

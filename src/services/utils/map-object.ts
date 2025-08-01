@@ -1,6 +1,22 @@
 import { ValueOf } from '@/types';
 import { notEmpty } from '@/services/utils/not-empty';
 
+/**
+ * Применяет функцию преобразования к каждой паре (ключ, значение) объекта и возвращает массив результатов.
+ *
+ * - Перебирает все собственные ключи объекта.
+ * - Передаёт в функцию `mappingFn` ключ и значение.
+ * - Возвращает массив значений, исключая `null` и `undefined`.
+ *
+ * @param obj Объект для итерации.
+ * @param mappingFn Функция преобразования `(key, value) => result`.
+ * @returns Массив результатов типа `MapValue[]`.
+ *
+ * @example
+ * const user = { name: "Alice", age: 30 };
+ * const result = mapObject(user, (key, value) => `${key}: ${value}`);
+ * // result: ["name: Alice", "age: 30"]
+ */
 export const mapObject = <Obj extends object, MapValue>(
     obj: Obj,
     mappingFn: (key: keyof Obj, value: ValueOf<Obj>) => MapValue,
@@ -13,6 +29,24 @@ export const mapObject = <Obj extends object, MapValue>(
     return result.filter(notEmpty);
 };
 
+/**
+ * Применяет функцию преобразования к каждой паре (ключ, значение) объекта и возвращает новый объект с теми же ключами, но преобразованными значениями.
+ *
+ * - Перебирает все собственные ключи объекта.
+ * - Передаёт в функцию `mappingFn` ключ и значение.
+ * - Возвращает объект `Record<keyof Obj, MapValue>`.
+ *
+ * @param obj Объект для итерации.
+ * @param mappingFn Функция преобразования `(key, value) => newValue`.
+ * @returns Новый объект с преобразованными значениями.
+ *
+ * @example
+ * const user = { name: "Alice", age: 30 };
+ * const uppercased = mapObjectToObject(user, (key, value) =>
+ *   typeof value === "string" ? value.toUpperCase() : value
+ * );
+ * // uppercased: { name: "ALICE", age: 30 }
+ */
 export const mapObjectToObject = <Obj extends object, MapValue>(
     obj: Obj,
     mappingFn: (key: keyof Obj, value: ValueOf<Obj>) => MapValue,

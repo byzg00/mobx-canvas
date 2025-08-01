@@ -42,9 +42,13 @@
 // });
 const dayJs = require('dayjs');
 
+const fs = require('fs');
+const path = require('path');
+
 module.exports = (req, res, next) => {
     if (req.method === 'GET' && req.url.match(/all/)) {
-        const db = require('./db.json');
+        const dbRaw = fs.readFileSync(path.resolve(__dirname, 'db.json'), 'utf-8');
+        const db = JSON.parse(dbRaw);
         res.json({
             // @ts-ignore
             objects: db[req.url.split('/')[1]],

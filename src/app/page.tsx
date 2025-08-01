@@ -1,6 +1,10 @@
+import { unstable_noStore as noStore } from 'next/cache';
+
 import { initStore } from '@/stores';
 import { StoreProvider } from '@/store';
-import HomePage from '@/app/home-client';
+import { CardsContainer } from '@/entities/assistant/CardsContainer';
+
+noStore();
 
 const Home = async () => {
     // const [showModal, setShowModal] = useState(false);
@@ -16,13 +20,17 @@ const Home = async () => {
     //     </div>
     // );
     const store = initStore();
-    await store.assistantStore.fetchList();
+    await Promise.all([
+        store.assistantsStore.fetchList(),
+        store.promptsStore.fetchList(),
+        store.collectionsStore.fetchList(),
+    ]);
 
     const initialData = store.toJSON();
 
     return (
         <StoreProvider initialData={initialData}>
-            <HomePage />
+            <CardsContainer />
         </StoreProvider>
     );
 };
