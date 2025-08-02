@@ -16,7 +16,7 @@ export const Cards = (props: Props) => {
     const { assistants, promptsStore, collectionsStore, patchAssistant, removeAssistant } = props;
 
     return (
-        <div className="flex flex-col items-center justify-center p-[12px]">
+        <div>
             <p><b>Ассистенты</b></p>
             <div className="flex flex-row flex-wrap gap-[12px]">
                 {assistants.map((assistant: Assistant) => (
