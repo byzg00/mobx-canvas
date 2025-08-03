@@ -2,10 +2,9 @@
 
 import React, { useEffect } from 'react';
 import { Layer, Rect, Stage, Text } from 'react-konva';
-import range from 'lodash/range';
 import { observer } from 'mobx-react';
 
-import { FIELD_SIZE, FIELDS, SIZE_PX } from '@/widgets/board/constants';
+import { FIELD_SIZE, SIZE_PX } from '@/widgets/board/constants';
 import { Board, board as boardModel } from '@/widgets/board/board';
 import { AppleFancy } from '@/widgets/board/AppleFancy';
 import { WormHead } from '@/widgets/board/WormHead';
@@ -44,19 +43,27 @@ const BoardInner = observer((props: { board: Board }) => {
     return (
         <Stage width={SIZE_PX} height={SIZE_PX}>
             <Layer>
-                {range(0, FIELDS).map((i) => (
-                    range(0, FIELDS).map((j) => (
-                        <Rect
-                            key={`field-${i}${j}`}
-                            x={FIELD_SIZE * i}
-                            y={FIELD_SIZE * j}
-                            width={FIELD_SIZE}
-                            height={FIELD_SIZE}
-                            stroke="black"
-                            strokeWidth={1}
-                        />
-                    ))
-                ))}
+                {/* {range(0, FIELDS).map((i) => ( */}
+                {/*    range(0, FIELDS).map((j) => ( */}
+                {/*        <Rect */}
+                {/*            key={`field-${i}${j}`} */}
+                {/*            x={FIELD_SIZE * i} */}
+                {/*            y={FIELD_SIZE * j} */}
+                {/*            width={FIELD_SIZE} */}
+                {/*            height={FIELD_SIZE} */}
+                {/*            stroke="black" */}
+                {/*            strokeWidth={1} */}
+                {/*        /> */}
+                {/*    )) */}
+                {/* ))} */}
+                <Rect
+                    x={1}
+                    y={1}
+                    width={SIZE_PX - 1}
+                    height={SIZE_PX - 1}
+                    stroke="black"
+                    strokeWidth={1}
+                />
                 {worm.parts.map((part, index) => {
                     if (index === 0) {
                         return <WormHead key="worm-head" worm={worm} apple={apple} />;
