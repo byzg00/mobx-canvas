@@ -2,34 +2,17 @@
 import range from 'lodash/range';
 import { observable, makeObservable, action } from 'mobx';
 
-import { FIELDS } from '@/widgets/board/constants';
+import { FIELDS } from './constants';
+import { Part } from './part';
 
-class WormPart {
-    public x: number;
-
-    public y: number;
-
-    constructor(props: {
-        x: number;
-        y: number;
-    }) {
-        this.x = props.x;
-        this.y = props.y;
-        makeObservable(this, {
-            x: observable,
-            y: observable,
-        });
-    }
-}
-
-type ChangeCoord = 1 | -1 | 0;
+export type ChangeCoord = 1 | -1 | 0;
 
 export class Worm {
     public length: number;
 
-    public parts: WormPart[];
+    public parts: Part[];
 
-    public head: WormPart;
+    public head: Part;
 
     constructor(props: {
         length: number;
@@ -39,7 +22,7 @@ export class Worm {
         const { length, headX, headY } = props;
         this.length = length;
         this.parts = range(0, length).map((i) => {
-            return new WormPart({ x: headX - i, y: headY });
+            return new Part({ x: headX - i, y: headY });
         });
         const [head] = this.parts;
         this.head = head;
@@ -50,7 +33,15 @@ export class Worm {
         });
     }
 
-    private canMove(dx: ChangeCoord, dy: ChangeCoord) {
+    public canMove(dx: ChangeCoord, dy: ChangeCoord) {
+        if (
+            this.head.x + dx > FIELDS - 1
+            || this.head.x + dx < 0
+            || this.head.y + dy > FIELDS - 1
+            || this.head.y + dy < 0
+        ) {
+            return false;
+        }
         return this.parts.every((part, partNum) => {
             if (partNum === 0) {
                 return true;
@@ -64,29 +55,34 @@ export class Worm {
             return;
         }
         const prevCoords = this.parts.map((part) => ({ x: part.x, y: part.y }));
-        if (this.head.x + dx > FIELDS - 1) {
-            this.head.x = 0;
-        } else if (this.head.x + dx < 0) {
-            this.head.x = FIELDS - 1;
-        } else {
-            this.head.x += dx;
-        }
-        if (this.head.y + dy > FIELDS - 1) {
-            this.head.y = 0;
-        } else if (this.head.y + dy < 0) {
-            this.head.y = FIELDS - 1;
-        } else {
-            this.head.y += dy;
-        }
+        // if (this.head.x + dx > FIELDS - 1) {
+        //     this.head.x = 0;
+        // } else if (this.head.x + dx < 0) {
+        //     this.head.x = FIELDS - 1;
+        // } else {
+        //     this.head.x += dx;
+        // }
+        // if (this.head.y + dy > FIELDS - 1) {
+        //     this.head.y = 0;
+        // } else if (this.head.y + dy < 0) {
+        //     this.head.y = FIELDS - 1;
+        // } else {
+        //     this.head.y += dy;
+        // }
+        this.head.x += dx;
+        this.head.y += dy;
         this.parts.slice(1).forEach((part, index) => {
             part.x = prevCoords[index].x;
             part.y = prevCoords[index].y;
         });
     }
-}
 
-export const worm = new Worm({
-    length: 5,
-    headX: 4,
-    headY: 4,
-});
+    public eat(dx: ChangeCoord, dy: ChangeCoord) {
+        const newHead = new Part({
+            x: this.head.x + dx,
+            y: this.head.y + dy,
+        });
+        this.parts.unshift(newHead);
+        this.head = newHead;
+    }
+}

@@ -1,29 +1,33 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { Layer, Rect, Stage } from 'react-konva';
+import { Layer, Rect, Stage, Text } from 'react-konva';
 import range from 'lodash/range';
 import { observer } from 'mobx-react';
 
 import { FIELD_SIZE, FIELDS, SIZE_PX } from '@/widgets/board/constants';
-import { worm as wormStore, Worm } from '@/widgets/board/worm';
+import { Board, board as boardModel } from '@/widgets/board/board';
+import { AppleFancy } from '@/widgets/board/AppleFancy';
+import { WormHead } from '@/widgets/board/WormHead';
+import { WormTail } from '@/widgets/board/WormTail';
 
-const BoardInner = observer((props: { worm: Worm }) => {
-    const { worm } = props;
+const BoardInner = observer((props: { board: Board }) => {
+    const { board } = props;
+    const { worm, apple } = board;
     useEffect(() => {
         const onKey = (event: KeyboardEvent) => {
             switch (event.key) {
                 case 'ArrowLeft':
-                    worm.move(-1, 0);
+                    board.wormMove(-1, 0);
                     break;
                 case 'ArrowRight':
-                    worm.move(1, 0);
+                    board.wormMove(1, 0);
                     break;
                 case 'ArrowUp':
-                    worm.move(0, -1);
+                    board.wormMove(0, -1);
                     break;
                 case 'ArrowDown':
-                    worm.move(0, 1);
+                    board.wormMove(0, 1);
                     break;
                 default: {
                     break;
@@ -34,8 +38,8 @@ const BoardInner = observer((props: { worm: Worm }) => {
         return () => {
             window.removeEventListener('keydown', onKey);
         };
-    }, [worm]);
-    console.log(worm);
+    }, [board]);
+    console.log('board', board);
 
     return (
         <Stage width={SIZE_PX} height={SIZE_PX}>
@@ -53,23 +57,44 @@ const BoardInner = observer((props: { worm: Worm }) => {
                         />
                     ))
                 ))}
-                {worm.parts.map((part) => (
-                    <Rect
-                        key={`worm-part-${part.x}${part.y}`}
-                        x={FIELD_SIZE * part.x}
-                        y={FIELD_SIZE * part.y}
-                        width={FIELD_SIZE}
-                        height={FIELD_SIZE}
-                        fill="black"
+                {worm.parts.map((part, index) => {
+                    if (index === 0) {
+                        return <WormHead key="worm-head" worm={worm} apple={apple} />;
+                    }
+
+                    if (index === worm.parts.length - 1) {
+                        return <WormTail worm={worm} key="worm-tail" />;
+                    }
+
+                    return (
+                        <Rect
+                            key={`worm-part-${part.x}-${part.y}`}
+                            x={FIELD_SIZE * part.x}
+                            y={FIELD_SIZE * part.y}
+                            width={FIELD_SIZE}
+                            height={FIELD_SIZE}
+                            fill="#228B22"
+                        />
+                    );
+                })}
+                <AppleFancy x={apple.x} y={apple.y} />
+
+                {board.isGameOver ? (
+                    <Text
+                        x={SIZE_PX / 3}
+                        y={SIZE_PX / 3}
+                        fontSize={70}
+                        fill="orange"
+                        text="Game over"
                     />
-                ))}
+                ) : null}
             </Layer>
         </Stage>
     );
 });
 
-export const Board = () => {
+export const BoardComponent = () => {
     return (
-        <BoardInner worm={wormStore} />
+        <BoardInner board={boardModel} />
     );
 };

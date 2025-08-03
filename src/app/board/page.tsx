@@ -1,11 +1,11 @@
-import { Board } from '@/widgets/board';
+import { BoardComponent } from '@/widgets/board';
 
 const BoardPage = () => {
     return (
         <div>
             <div>Board</div>
             <div>
-                <Board />
+                <BoardComponent />
             </div>
         </div>
     );
