@@ -4,11 +4,12 @@ import React, { useEffect } from 'react';
 import { Layer, Rect, Stage, Text } from 'react-konva';
 import { observer } from 'mobx-react';
 
-import { FIELD_SIZE, SIZE_PX } from '@/widgets/board/constants';
+import { SIZE_PX } from '@/widgets/board/constants';
 import { Board, board as boardModel } from '@/widgets/board/board';
 import { AppleFancy } from '@/widgets/board/AppleFancy';
 import { WormHead } from '@/widgets/board/WormHead';
 import { WormTail } from '@/widgets/board/WormTail';
+import { WormBodySegment } from '@/widgets/board/WormBodySegment';
 
 const BoardInner = observer((props: { board: Board }) => {
     const { board } = props;
@@ -74,13 +75,13 @@ const BoardInner = observer((props: { board: Board }) => {
                     }
 
                     return (
-                        <Rect
+                        <WormBodySegment
                             key={`worm-part-${part.x}-${part.y}`}
-                            x={FIELD_SIZE * part.x}
-                            y={FIELD_SIZE * part.y}
-                            width={FIELD_SIZE}
-                            height={FIELD_SIZE}
-                            fill="#228B22"
+                            prev={worm.parts[index - 1]}
+                            current={part}
+                            next={worm.parts[index + 1]}
+                            index={index}
+                            total={worm.parts.length}
                         />
                     );
                 })}
